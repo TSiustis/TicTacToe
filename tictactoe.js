@@ -1,8 +1,6 @@
 var game = {
 
-	// 0 1 2
-	// 3 4 5
-	// 6 7 8
+	
 
 	gameNum: 0,
 	player: '',
@@ -102,7 +100,7 @@ var game = {
 	},
 
 	playerTurn: function playerTurn () {
-		// when a free square is clicked, draw X or O, disable click functionality
+		// when a free square is clicked, draw X or O
 		var allSquares = this.freeMoves.join(', ');
 		$(allSquares).one('click', function () {
 			$(this).append('<h2>' + game.player + '</h2>');
@@ -115,11 +113,11 @@ var game = {
 			// get all player moves
 			var playerMoves = game.marks(game.player);
 
-			// check them for winning combo
+			// check for winning combo
 			var playerWin = game.checkWin(playerMoves);
 
 			if (playerWin) {
-				game.over('player wins');
+				game.over('You won!');
 			} else if (game.freeMoves.length > 0) {
 				game.move = game.move || true;
 				game.compTurn();
@@ -211,7 +209,6 @@ var game = {
 
 
 		function block () {
-			// player move index num === elem?
 			function makeCheck(moves) {
 				return function (input) {
 					return moves.some(function (element) {
@@ -254,7 +251,6 @@ var game = {
 
 		// Player blocked last move? Return true.
 		function didPlayerBlock () {
-			// player move index num === elem?
 			function makeCheck (moves) {
 				return function (input) {
 					return moves.some(function (element) {
@@ -337,7 +333,7 @@ var game = {
 			return false;
 		}
 
-// PERFECT PLAY LOGIC  //
+// PLAY LOGIC  //
 
 		
 		if (moveNum === 1) {
@@ -350,7 +346,7 @@ var game = {
 			}
 		}
 
-// COMP CENTER
+// AI CENTER
 		if ('center' === game.path) {
 
 // Player edge
@@ -442,7 +438,7 @@ var game = {
 		} 
 
 
-// COMP CORNER
+// AI CORNER
 
 		if ('corner' === game.path) {
 
@@ -586,8 +582,8 @@ var game = {
 					}
 				}
 			} // player center
-		} // comp corner
-// END PERFECT LOGIC
+		} // AI corner
+// END LOGIC
 
 		function getPrevMove () {
 			var prevMoves = game.compMoves;
